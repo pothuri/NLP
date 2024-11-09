@@ -6,6 +6,7 @@ pip3 install sentence_transformers
 pip3 install scikit-learn
 pip3 install sentencepiece
 pip3 install pyspark
+apt install openjdk-21-jre-headless
 
 
 from transformers import pipeline
@@ -96,3 +97,38 @@ translation = translator(text, max_length=40)
 
 # Display the translation
 print(f"Translated text: {translation[0]['translation_text']}")
+
+
+from pyspark.sql import SparkSession
+
+# Initialize Spark session (if not already done)
+spark = SparkSession.builder.appName("example").getOrCreate()
+
+# Sample data for the example
+data = [("Alice", 1), ("Bob", 2), ("Cathy", 1)]
+columns = ["name", "column_name"]
+df = spark.createDataFrame(data, columns)
+
+# Filtering rows where column_name has a specific value
+filtered_df = df.filter(df["column_name"] == 1)
+
+# Show filtered result
+filtered_df.show()
+
+root@LAPTOP-BNKKT024:/home/happyhops# apt install openjdk-21-jre-headlessca^C
+root@LAPTOP-BNKKT024:/home/happyhops# cat pysp.py
+from pyspark.sql import SparkSession
+
+# Initialize Spark session (if not already done)
+spark = SparkSession.builder.appName("example").getOrCreate()
+
+# Sample data for the example
+data = [("Alice", 1), ("Bob", 2), ("Cathy", 1)]
+columns = ["name", "column_name"]
+df = spark.createDataFrame(data, columns)
+
+# Filtering rows where column_name has a specific value
+filtered_df = df.filter(df["column_name"] == 1)
+
+# Show filtered result
+filtered_df.show()
