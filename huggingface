@@ -1,3 +1,4 @@
+https://www.freecodecamp.org/news/author/manishshivanandhan/
 apt install python3-pip
 pip3 install torch torchvision torchaudio
 pip3 install transformers
