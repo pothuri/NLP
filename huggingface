@@ -1,4 +1,22 @@
 https://www.freecodecamp.org/news/author/manishshivanandhan/
+pandas - data manipulation
+Hadoop 
+kafka
+pyspark - storage, database, jobs
+
+pytorch, tensorflow - ML
+matplotlib, seaborn - visulalization
+
+darts - time series
+
+Bert - NLP
+
+beautifulsoup - web scrapping
+
+pystan - stat analysis
+
+
+
 apt install python3-pip
 pip3 install torch torchvision torchaudio
 pip3 install transformers
