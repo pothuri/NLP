@@ -1,0 +1,98 @@
+apt install python3-pip
+pip3 install torch torchvision torchaudio
+pip3 install transformers
+pip3 install pandas
+pip3 install sentence_transformers
+pip3 install scikit-learn
+pip3 install sentencepiece
+pip3 install pyspark
+
+
+from transformers import pipeline
+
+qa_pipeline = pipeline("question-answering")
+context = """
+Skoda Auto India surprised us earlier this week at the unveiling of the Kylaq by announcing the entry-level price of the sub-four-metre SUV. The model, which is priced from Rs. 7.89 lakh (ex-showroom) onwards, will be launched in India on 2 December. The carmaker will also commence bookings of its most affordable offering in India on the same date.We have now got our hands on the colour options and variant details of the new Kylaq ahead of its variant-wise price reveal. The Nexon rival will be offered in a total of five colours across four variants.
+Customers purchasing the new Kylaq will be able to choose from five paints, namely Olive Gold, Tornado Red, Carbon Steel, Brilliant Silver, and Candy White. Furthermore, the four variants on offer will be Classic, Signature, Signature+, and Prestige.
+The 2024 Kylaq gets the 1.0-litre, three-cylinder, TSI turbo-petrol engine, which is the sole motor on offer. Tuned to produce 114bhp and 178Nm, it will be available with six-speed manual and torque converter transmissions. The deliveries of the model are scheduled to begin in 2025, and you can read the finer details about it on our website.
+"""
+questions = [
+    "what are the variants?",
+    "what are different colors available?"
+    ]
+for q in questions:
+    result = qa_pipeline(question=q, context=context)
+    print(f"Q: {q}\nA: {result['answer']}\n")
+
+
+
+
+
+from transformers import pipeline
+
+qa_pipeline = pipeline("question-answering")
+context = """
+Skoda Auto India surprised us earlier this week at the unveiling of the Kylaq by announcing the entry-level price of the sub-four-metre SUV. The model, which is priced from Rs. 7.89 lakh (ex-showroom) onwards, will be launched in India on 2 December. The carmaker will also commence bookings of its most affordable offering in India on the same date.We have now got our hands on the colour options and variant details of the new Kylaq ahead of its variant-wise price reveal. The Nexon rival will be offered in a total of five colours across four variants.
+Customers purchasing the new Kylaq will be able to choose from five paints, namely Olive Gold, Tornado Red, Carbon Steel, Brilliant Silver, and Candy White. Furthermore, the four variants on offer will be Classic, Signature, Signature+, and Prestige.
+The 2024 Kylaq gets the 1.0-litre, three-cylinder, TSI turbo-petrol engine, which is the sole motor on offer. Tuned to produce 114bhp and 178Nm, it will be available with six-speed manual and torque converter transmissions. The deliveries of the model are scheduled to begin in 2025, and you can read the finer details about it on our website.
+"""
+questions = [
+    "what are the variants?",
+    "what are different colors available?"
+    ]
+for q in questions:
+    result = qa_pipeline(question=q, context=context)
+    print(f"Q: {q}\nA: {result['answer']}\n")
+
+root@LAPTOP-BNKKT024:/home/happyhops# cat model1.py
+from sentence_transformers import SentenceTransformer, util
+
+# Load pre-trained model
+model = SentenceTransformer('all-MiniLM-L6-v2')
+
+# Sample sentences
+sentence1 = "The weather is sunny today."
+sentence2 = "students enjoying summer vacation"
+
+# Get embeddings
+embedding1 = model.encode(sentence1)
+embedding2 = model.encode(sentence2)
+
+# Compute cosine similarity
+similarity = util.cos_sim(embedding1, embedding2)
+print(f"Similarity score: {similarity.item():.2f}")
+
+
+
+
+from transformers import pipeline
+
+# Initialize the fill-mask pipeline with a pre-trained masked language model
+fill_mask = pipeline("fill-mask", model="bert-base-uncased")
+
+# Define a sentence with a [MASK] token
+sentence = "The capital of France is [MASK]."
+
+# Get predictions for the masked word
+predictions = fill_mask(sentence)
+
+# Print the top predictions
+for idx, prediction in enumerate(predictions):
+    print(f"{idx + 1}: {prediction['sequence']} (score: {prediction['score']:.4f})")
+
+
+
+from transformers import pipeline
+
+# Initialize the translation pipeline
+# This model translates from English to French. Change model name for other languages.
+translator = pipeline("translation_en_to_fr", model="Helsinki-NLP/opus-mt-en-fr")
+
+# Define the text to translate
+text = "Hugging Face makes NLP easier and more accessible."
+
+# Translate the text
+translation = translator(text, max_length=40)
+
+# Display the translation
+print(f"Translated text: {translation[0]['translation_text']}")
